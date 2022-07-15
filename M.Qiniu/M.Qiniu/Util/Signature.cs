@@ -1,8 +1,7 @@
-﻿using Newtonsoft.Json;
-using System.Security.Cryptography;
+﻿using System.Security.Cryptography;
 using System.Text;
 
-namespace M.Qiniu.Core
+namespace M.Qiniu
 {
     public class Signature
     {

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Text;
 
-namespace M.Qiniu.Core
+namespace M.Qiniu
 {
     /// <summary>
     /// Base64 编码/解码

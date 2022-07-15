@@ -1,4 +1,4 @@
-﻿namespace M.Qiniu.Core
+﻿namespace M.Qiniu
 {
     /// <summary>
     /// 账户访问控制(密钥)

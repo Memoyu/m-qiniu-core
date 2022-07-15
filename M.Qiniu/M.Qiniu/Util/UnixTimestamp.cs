@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace M.Qiniu.Core
+namespace M.Qiniu
 {
     /// <summary>
     /// 时间戳与日期时间转换

@@ -1,6 +1,6 @@
 ﻿using System.IO;
 
-namespace M.Qiniu.Core
+namespace M.Qiniu
 {
     public interface IQiniuClient
     {
@@ -8,7 +8,7 @@ namespace M.Qiniu.Core
         /// 获取上传Token
         /// </summary>
         /// <returns></returns>
-        string GetUploadToken();
+        string CreateUploadToken();
 
         /// <summary>
         /// 上传文件

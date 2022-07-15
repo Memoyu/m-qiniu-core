@@ -1,26 +1,21 @@
-﻿using Microsoft.Extensions.Options;
-using System;
+﻿using System;
 using System.IO;
-using System.Net.Http;
 
-namespace M.Qiniu.Core
+namespace M.Qiniu
 {
     public class QiniuClient : IQiniuClient
     {
-        private readonly IHttpClientFactory _factory;
-
         private readonly QiniuClientOption _option;
 
         private readonly Signature _sign;
 
-        public QiniuClient(IHttpClientFactory factory, IOptionsMonitor<QiniuClientOption> option)
+        public QiniuClient(QiniuClientOption option)
         {
-            _factory = factory;
-            _option = option.CurrentValue;
+            _option = option;
             _sign = new Signature(new Mac(_option.AK, _option.SK));
         }
 
-        public string GetUploadToken()
+        public string CreateUploadToken()
         {
             var policy = new PutPolicy
             {
