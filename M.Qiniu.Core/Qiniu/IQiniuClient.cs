@@ -1,6 +1,6 @@
 ﻿using System.IO;
 
-namespace M.Qiniu
+namespace M.Qiniu.Core
 {
     public interface IQiniuClient
     {
@@ -16,6 +16,6 @@ namespace M.Qiniu
         /// <param name="path">文件上传路径 例如：xxxx/xxxxx/image.png</param>
         /// <param name="file">文件流</param>
         /// <returns></returns>
-        string Upload(string path, Stream file);
+        string UploadStream(string path, Stream file);
     }
 }

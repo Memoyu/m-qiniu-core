@@ -1,4 +1,4 @@
-﻿namespace M.Qiniu
+﻿namespace M.Qiniu.Core
 {
     public class QiniuClientOption
     {
@@ -12,4 +12,5 @@
 
         public bool UseHttps { get; set; }
     }
+
 }

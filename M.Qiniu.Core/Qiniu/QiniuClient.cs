@@ -1,7 +1,11 @@
-﻿using System;
+﻿using Microsoft.Extensions.Options;
+using Qiniu.Storage;
+using Qiniu.Util;
+using System;
 using System.IO;
+using System.Net.Http;
 
-namespace M.Qiniu
+namespace M.Qiniu.Core
 {
     public class QiniuClient : IQiniuClient
     {
@@ -9,9 +13,9 @@ namespace M.Qiniu
 
         private readonly Signature _sign;
 
-        public QiniuClient(QiniuClientOption option)
+        public QiniuClient(IOptionsMonitor<QiniuClientOption> option)
         {
-            _option = option;
+            _option = option.CurrentValue;
             _sign = new Signature(new Mac(_option.AK, _option.SK));
         }
 
@@ -21,11 +25,11 @@ namespace M.Qiniu
             {
                 Scope = _option.Bucket
             };
-            return _sign.SignByPolicy(policy);
+            return _sign.SignWithData(policy.ToJsonString());
 
         }
 
-        public string Upload(string path, Stream file)
+        public string UploadStream(string path, Stream file)
         {
             throw new NotImplementedException();
         }
