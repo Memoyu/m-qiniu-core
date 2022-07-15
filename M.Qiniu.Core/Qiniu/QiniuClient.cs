@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.Options;
+using Qiniu.Http;
 using Qiniu.Storage;
 using Qiniu.Util;
 using System;
@@ -12,6 +13,7 @@ namespace M.Qiniu.Core
         private readonly QiniuClientOption _option;
 
         private readonly Signature _sign;
+
 
         public QiniuClient(IOptionsMonitor<QiniuClientOption> option)
         {
@@ -29,9 +31,18 @@ namespace M.Qiniu.Core
 
         }
 
-        public string UploadStream(string path, Stream file)
+        public (bool success, string msg, string domainKey) UploadStream(string path, Stream file)
         {
-            throw new NotImplementedException();
+
+            return UploadStream(path, file, new Config { UseHttps = _option.UseHttps }, new PutExtra { Version = "v2" });
+        }
+
+        public (bool success, string msg, string domainKey) UploadStream(string path, Stream file, Config config, PutExtra extra)
+        {
+            FormUploader uploader = new FormUploader(config);
+            HttpResult result = uploader.UploadStream(file, path, CreateUploadToken(), extra);
+            var status = result.Code == (int)HttpCode.OK;
+            return (status, result.Text, status ? $"{_option.Host}{path}" : string.Empty);
         }
     }
 }
